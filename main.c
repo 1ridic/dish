@@ -19,9 +19,7 @@ void intHandler(int dummy) {
   if (isWaiting==1) {
     return;
   }
-  extern FILE* hf;
-  fprintf(stderr,"\nSIGINT exit.");
-  fclose(hf);
+  fprintf(stderr,"\nSIGINT exit.\n");
   exit(EXIT_FAILURE);
   
 }
@@ -31,18 +29,11 @@ int main(int argc, char *argv[]) {
   signal(SIGINT, intHandler);
   /* clear screen */
   fprintf(stdout,"\033[H\033[J");
-  /* open history file */
-  extern FILE* hf;
-  const char* hf_path=strcat(getenv("HOME"), "/.dish_history");
-  hf = fopen(hf_path, "a+");
-  
 #ifdef DEBUG
   fprintf(stdout,"DEBUG is defined\n");
 #endif
   while (1) {
     loop();
   }
-  
-  fclose(hf);
   return 0;
 }

@@ -1,16 +1,13 @@
 /*
  * @Author: 1ridic 
  * @Date: 2022-09-18 14:14:05 
- * @Last Modified by: 1ridic
- * @Last Modified time: 2022-09-18 22:08:27
+ * @Last Modified by:   1ridic 
+ * @Last Modified time: 2022-09-18 14:14:05 
  */
 #include "line.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
-
-FILE *hf = NULL;
 
 char *readLine(void) {
   int bufsize = LINE_BUF_SIZE;
@@ -29,8 +26,6 @@ char *readLine(void) {
     // repleace EOF with a null character and return
     if (c == EOF || c == '\n') {
       buffer[position] = '\0';
-      time_t tick=time(NULL);
-      fprintf(hf,"%d:%s\n",(int)tick,buffer);
       return buffer;
     } else {
       buffer[position] = c;

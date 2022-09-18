@@ -1,9 +1,9 @@
-# fish - Yet another shell with C
+# dish - Yet another shell with C
 
 # TODO
 
-- [x] History save
 - [x] Environment variable settings
+- [ ] History save
 - [ ] Color
 - [ ] Completion
 - [ ] Config dotfile support
