@@ -2,7 +2,7 @@
  * @Author: 1ridic 
  * @Date: 2022-09-18 14:16:19 
  * @Last Modified by: 1ridic
- * @Last Modified time: 2022-09-18 14:28:01
+ * @Last Modified time: 2022-09-18 14:52:17
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,17 +12,20 @@
 int dish_cd(char **args);
 int dish_help(char **args);
 int dish_exit(char **args);
+int dish_clear(char **args);
 
 char* builtin_cmd[] = {
   "cd",
   "help",
-  "exit"
+  "exit",
+  "clear"
 };
 
 int (*builtin_func[]) (char **) = {
   &dish_cd,
   &dish_help,
-  &dish_exit
+  &dish_exit,
+  &dish_clear
 };
 
 int dish_cd(char **args)
@@ -50,4 +53,9 @@ int dish_exit(char **args)
 
 int getBuiltinNum() {
   return sizeof(builtin_cmd) / sizeof(char *);
+}
+
+int dish_clear(char **args){
+  fprintf(stdout,"\033[H\033[J");
+  return 0;
 }
