@@ -2,7 +2,7 @@
  * @Author: 1ridic
  * @Date: 2022-09-18 14:16:19
  * @Last Modified by: 1ridic
- * @Last Modified time: 2022-09-18 20:46:12
+ * @Last Modified time: 2022-09-18 23:32:50
  */
 #include "builtin.h"
 #include <stdio.h>
@@ -18,12 +18,13 @@ int dish_clear(char **args);
 int dish_setenv(char **args);
 int dish_echo(char **args);
 int dish_unset(char **args);
+int dish_laststatus(char **args);
 
-char *builtin_cmd[] = {"cd", "help", "exit", "clear", "setenv", "echo", "unset"};
+char *builtin_cmd[] = {"cd", "help", "exit", "clear", "setenv", "echo", "unset","laststatus"};
 
 int (*builtin_func[])(char **) = {&dish_cd,    &dish_help, &dish_exit,
                                   &dish_clear, &dish_setenv,  &dish_echo,
-                                  &dish_unset};
+                                  &dish_unset,&dish_laststatus};
 
 int getBuiltinNum() { return sizeof(builtin_cmd) / sizeof(char *); }
 
@@ -77,5 +78,12 @@ int dish_unset(char **args) {
     unsetenv(args[i]);
     i++;
   }
+  return 0;
+}
+
+int dish_laststatus(char **args)
+{
+  extern int status;
+  fprintf(stdout,"%d\n",status);
   return 0;
 }

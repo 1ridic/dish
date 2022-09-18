@@ -2,7 +2,7 @@
  * @Author: 1ridic
  * @Date: 2022-09-18 14:14:23
  * @Last Modified by: 1ridic
- * @Last Modified time: 2022-09-18 23:21:56
+ * @Last Modified time: 2022-09-18 23:31:39
  */
 #include "builtin.h"
 #include <stdio.h>
@@ -45,7 +45,7 @@ int forkExec(char **args) {
       return WTERMSIG(stat_val);
     }
   }
-  return -1;
+  return -100;
 }
 
 int commandExec(char **args) {
