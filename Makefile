@@ -1,8 +1,10 @@
-OBJ=main.o
+OBJ=main.o line.o
 CC=gcc
 CFLAGS= -O3 -Wall
 
-all:dish
+all:debug
+
+release:dish
 
 dish: $(OBJ)
 	$(CC) $(CFLAGS) -o dish $(OBJ)

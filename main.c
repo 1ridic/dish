@@ -19,8 +19,7 @@ int main(int argc, char *argv[]) {
   printf("DEBUG is defined\n");
 #endif
   while (1) {
-    printf("runing!\n");
-    sleep(1);
+    line();
   }
   return 0;
 }
