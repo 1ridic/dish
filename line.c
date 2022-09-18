@@ -17,7 +17,6 @@ char *readLine(void) {
   while (1) {
     // read a character
     c = getchar();
-    printf("%s", &c);
     // repleace EOF with a null character and return
     if (c == EOF || c == '\n') {
       buffer[position] = '\0';

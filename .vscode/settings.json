@@ -5,5 +5,12 @@
         "loop.h": "c",
         "exec.h": "c"
     },
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/ir/dev/priCode/dish",
+            "binaryPath": "/home/ir/dev/priCode/dish/dish",
+            "binaryArgs": []
+        }
+    ]
 }
