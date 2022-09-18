@@ -17,7 +17,7 @@ debug: $(DBGOBJ)
 	$(CC) $(CFLAGS) -o $(DBGEXE) $(DBGOBJ)
 
 clean:
-	rm -f *.o
+	rm -f *.o *.do *.ro
 
 $(OBJ):$(SRC)
 	$(CC) $(CFLAGS) -c $(SRC)
