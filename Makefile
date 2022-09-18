@@ -1,4 +1,4 @@
-OBJ=main.o line.o
+OBJ=main.o line.o loop.o exec.o
 CC=gcc
 CFLAGS= -O3 -Wall
 

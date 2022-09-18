@@ -57,6 +57,9 @@ char **splitLine(char *line) {
 
   while (token != NULL) {
     tokens[position] = token;
+#ifdef DEBUG
+    fprintf(stdout, "debug: tokens[%d] = %s\n", position, tokens[position]);
+#endif
     position++;
 
     /* if the buffer is full, reallocate */
@@ -75,13 +78,4 @@ char **splitLine(char *line) {
   /* set the last element to NULL */
   tokens[position] = NULL;
   return tokens;
-}
-
-void line() {
-  char *line;
-  int status = 1;
-  char str;
-  printf("> ");
-  line = readLine();
-  free(line);
 }

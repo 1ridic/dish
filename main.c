@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "line.h"
-
+#include "loop.h"
 
 void intHandler(int dummy) {
   printf("\nend!\n");
@@ -19,7 +18,7 @@ int main(int argc, char *argv[]) {
   printf("DEBUG is defined\n");
 #endif
   while (1) {
-    line();
+    loop();
   }
   return 0;
 }
