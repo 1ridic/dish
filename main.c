@@ -2,7 +2,7 @@
  * @Author: 1ridic 
  * @Date: 2022-09-18 14:13:59 
  * @Last Modified by: 1ridic
- * @Last Modified time: 2022-09-18 22:01:12
+ * @Last Modified time: 2022-09-18 22:34:28
  */
 #include <signal.h>
 #include <stdio.h>
@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
   fprintf(stdout,"\033[H\033[J");
   /* open history file */
   extern FILE* hf;
-  hf = fopen(strcat(getenv("HOME"), "/.dish_history"), "w");
+  hf = fopen(strcat(getenv("HOME"), "/.dish_history"), "a+");
   
 #ifdef DEBUG
   fprintf(stdout,"DEBUG is defined\n");
