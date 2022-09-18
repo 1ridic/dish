@@ -1,2 +1,5 @@
 *.o
+*.ro
+*.do
+ddish
 dish
