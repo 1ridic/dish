@@ -2,7 +2,7 @@
  * @Author: 1ridic 
  * @Date: 2022-09-18 14:13:59 
  * @Last Modified by: 1ridic
- * @Last Modified time: 2022-09-18 14:53:04
+ * @Last Modified time: 2022-09-18 20:43:07
  */
 #include <signal.h>
 #include <stdio.h>
@@ -12,11 +12,15 @@
 
 char volatile isWaiting = 0; 
 void intHandler(int dummy) {
-  if (isWaiting) {
+#ifdef DEBUG
+  fprintf(stdout,"\ndebug: enter soft-irq. isWaiting=%d\n",isWaiting);
+#endif
+  if (isWaiting==1) {
     return;
+  }
   fprintf(stderr,"\nSIGINT exit.\n");
   exit(EXIT_FAILURE);
-  }
+  
 }
 
 int main(int argc, char *argv[]) {
