@@ -1,32 +1,32 @@
 /*
- * @Author: 1ridic 
- * @Date: 2022-09-18 14:14:23 
+ * @Author: 1ridic
+ * @Date: 2022-09-18 14:14:23
  * @Last Modified by: 1ridic
- * @Last Modified time: 2022-09-18 14:44:37
+ * @Last Modified time: 2022-09-18 23:21:56
  */
+#include "builtin.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <unistd.h>
-#include "builtin.h"
 
-extern int (*builtin_func[]) (char **);
-extern char* builtin_cmd[];
+extern int (*builtin_func[])(char **);
+extern char *builtin_cmd[];
 
 int forkExec(char **args) {
   pid_t pid;
-  int status;
 #ifdef DEBUG
-    printf("debug: fork enter.\n");
+  printf("debug: fork enter.\n");
 #endif
   pid = fork();
-  if (pid == 0) { 
+  if (pid == 0) {
     /* child process */
-      if (execvp(args[0], args) == -1) {
-        perror("dish");
-        exit(EXIT_FAILURE);
-      }
+    if (execvp(args[0], args) == -1) {
+      perror("dish");
+      exit(EXIT_FAILURE);
+    }
   } else if (pid < 0) {
     /* fork error */
     perror("dish");
@@ -34,11 +34,18 @@ int forkExec(char **args) {
     extern char volatile isWaiting;
     isWaiting = 1;
     /* parent process: wait child process*/
-    pid=wait(&status);
-    isWaiting = 0;
-    
+    int stat_val;
+    waitpid(pid, &stat_val, 0);
+    if (WIFEXITED(stat_val)) {
+      isWaiting = 0;
+      return WEXITSTATUS(stat_val);
+    }
+    else if (WIFSIGNALED(stat_val)) {
+      isWaiting = 1;
+      return WTERMSIG(stat_val);
+    }
   }
-  return WEXITSTATUS(status);
+  return -1;
 }
 
 int commandExec(char **args) {
