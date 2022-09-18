@@ -1,3 +1,9 @@
+/*
+ * @Author: 1ridic 
+ * @Date: 2022-09-18 14:13:53 
+ * @Last Modified by:   1ridic 
+ * @Last Modified time: 2022-09-18 14:13:53 
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,11 +15,10 @@ int loop() {
   
   char *line;
   char **args;
-  int status = 1;
   printf("> ");
   line = readLine();
   args = splitLine(line);
-  status = forkExec(args);
+  commandExec(args);
   free(line);
   free(args);
   return 0;

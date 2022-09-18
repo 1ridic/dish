@@ -1,3 +1,9 @@
+/*
+ * @Author: 1ridic 
+ * @Date: 2022-09-18 14:14:05 
+ * @Last Modified by:   1ridic 
+ * @Last Modified time: 2022-09-18 14:14:05 
+ */
 #include "line.h"
 #include <stdio.h>
 #include <stdlib.h>
