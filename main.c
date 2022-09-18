@@ -1,12 +1,13 @@
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include "line.h"
 
-static volatile int keepRunning = 1;
 
 void intHandler(int dummy) {
   printf("\nend!\n");
-  keepRunning = 0;
+  exit(EXIT_FAILURE);
 }
 
 int main(int argc, char *argv[]) {
@@ -17,7 +18,7 @@ int main(int argc, char *argv[]) {
 #ifdef DEBUG
   printf("DEBUG is defined\n");
 #endif
-  while (keepRunning) {
+  while (1) {
     printf("runing!\n");
     sleep(1);
   }
