@@ -16,15 +16,17 @@ int dish_help(char **args);
 int dish_exit(char **args);
 int dish_clear(char **args);
 int dish_setenv(char **args);
+int dish_getenv(char **args);
+int dish_unsetenv(char **args);
 int dish_echo(char **args);
-int dish_unset(char **args);
 int dish_laststatus(char **args);
 
-char *builtin_cmd[] = {"cd", "help", "exit", "clear", "setenv", "echo", "unset","laststatus"};
+char *builtin_cmd[] = {"cd",     "help",     "exit", "clear",     "setenv",
+                       "getenv", "unsetenv", "echo", "laststatus"};
 
-int (*builtin_func[])(char **) = {&dish_cd,    &dish_help, &dish_exit,
-                                  &dish_clear, &dish_setenv,  &dish_echo,
-                                  &dish_unset,&dish_laststatus};
+int (*builtin_func[])(char **) = {
+    &dish_cd,     &dish_help,     &dish_exit, &dish_clear,     &dish_setenv,
+    &dish_getenv, &dish_unsetenv, &dish_echo, &dish_laststatus};
 
 int getBuiltinNum() { return sizeof(builtin_cmd) / sizeof(char *); }
 
@@ -52,14 +54,27 @@ int dish_clear(char **args) {
 }
 
 int dish_setenv(char **args) {
-if (args[1] == NULL || args[2] == NULL)
-{
-  fprintf(stderr, "dish: expected 2 arguments to \"setenv\"\n");
-  return 1;
+  if (args[1] == NULL || args[2] == NULL) {
+    fprintf(stderr, "dish: expected 2 arguments to \"setenv\"\n");
+    return 1;
+  }
+
+  setenv(args[1], args[2], 1);
+  return 0;
 }
 
-setenv(args[1], args[2], 1);
-return 0;
+int dish_getenv(char **args) {
+  fprintf(stdout, "%s\n", getenv(args[1]));
+  return 0;
+}
+
+int dish_unsetenv(char **args) {
+  long i = 1;
+  while (args[i] != NULL) {
+    unsetenv(args[i]);
+    i++;
+  }
+  return 0;
 }
 
 int dish_echo(char **args) {
@@ -72,18 +87,8 @@ int dish_echo(char **args) {
   return 0;
 }
 
-int dish_unset(char **args) {
-  long i = 1;
-  while (args[i] != NULL) {
-    unsetenv(args[i]);
-    i++;
-  }
-  return 0;
-}
-
-int dish_laststatus(char **args)
-{
+int dish_laststatus(char **args) {
   extern int status;
-  fprintf(stdout,"%d\n",status);
+  fprintf(stdout, "%d\n", status);
   return 0;
 }
