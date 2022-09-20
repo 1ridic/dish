@@ -17,7 +17,7 @@ int loop() {
 
   char *line;
   char **args;
-  printf("> ");
+  printf(ANSI_COLOR_GREEN"> "ANSI_COLOR_RESET);
   line = readLine();
   args = splitLine(line);
   status = commandExec(args);

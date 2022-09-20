@@ -6,5 +6,6 @@
  */
 #ifndef _LOOP_H_
 #define _LOOP_H_
+#include "config.h"
 int loop();
 #endif
