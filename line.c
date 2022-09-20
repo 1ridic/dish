@@ -1,48 +1,16 @@
 /*
- * @Author: 1ridic 
- * @Date: 2022-09-18 14:14:05 
- * @Last Modified by:   1ridic 
- * @Last Modified time: 2022-09-18 14:14:05 
+ * @Author: 1ridic
+ * @Date: 2022-09-18 14:14:05
+ * @Last Modified by:   1ridic
+ * @Last Modified time: 2022-09-18 14:14:05
  */
-#include "line.h"
 #include <stdio.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 #include <stdlib.h>
 #include <string.h>
-
-char *readLine(void) {
-  int bufsize = LINE_BUF_SIZE;
-  int position = 0;
-  char *buffer = malloc(sizeof(char) * bufsize);
-  char c;
-
-  if (!buffer) {
-    fprintf(stderr, "dish: allocation error\n");
-    exit(EXIT_FAILURE);
-  }
-
-  while (1) {
-    // read a character
-    c = getchar();
-    // repleace EOF with a null character and return
-    if (c == EOF || c == '\n') {
-      buffer[position] = '\0';
-      return buffer;
-    } else {
-      buffer[position] = c;
-    }
-    position++;
-
-    /* if the buffer is full, reallocate */
-    if (position >= bufsize) {
-      bufsize += LINE_BUF_SIZE;
-      buffer = realloc(buffer, bufsize);
-      if (!buffer) {
-        fprintf(stderr, "dish: allocation error\n");
-        exit(EXIT_FAILURE);
-      }
-    }
-  }
-}
+#include <unistd.h>
+#include "line.h"
 
 char **splitLine(char *line) {
   int bufsize = LINE_BUF_SIZE, position = 0;
