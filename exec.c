@@ -2,7 +2,7 @@
  * @Author: 1ridic
  * @Date: 2022-09-18 14:14:23
  * @Last Modified by: 1ridic
- * @Last Modified time: 2022-09-18 23:31:39
+ * @Last Modified time: 2022-09-20 22:24:51
  */
 #include "builtin.h"
 #include <stdio.h>
@@ -31,17 +31,13 @@ int forkExec(char **args) {
     /* fork error */
     perror("dish");
   } else {
-    extern char volatile isWaiting;
-    isWaiting = 1;
     /* parent process: wait child process*/
     int stat_val;
     waitpid(pid, &stat_val, 0);
     if (WIFEXITED(stat_val)) {
-      isWaiting = 0;
       return WEXITSTATUS(stat_val);
     }
     else if (WIFSIGNALED(stat_val)) {
-      isWaiting = 1;
       return WTERMSIG(stat_val);
     }
   }

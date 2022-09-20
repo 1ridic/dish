@@ -2,7 +2,7 @@
  * @Author: 1ridic
  * @Date: 2022-09-18 14:13:53
  * @Last Modified by: 1ridic
- * @Last Modified time: 2022-09-18 23:32:02
+ * @Last Modified time: 2022-09-20 22:26:59
  */
 #include <stdio.h>
 #include <readline/readline.h>
@@ -14,6 +14,20 @@
 #include "line.h"
 
 int status;
+
+void SIGINT_Handler(int dummy) {
+#ifdef DEBUG
+  fprintf(stdout,"\ndebug: SIGINT\n");
+#endif
+  /* Move to a new line */
+  fprintf(stdout,"\n");
+  /* Regenerate the prompt on a newline */
+  rl_on_new_line();
+  /* Clear the previous text */
+  rl_replace_line("", 0);
+  rl_redisplay();
+  return;
+}
 
 int loop() {
 
