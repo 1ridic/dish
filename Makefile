@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 CC     = gcc
-SRC = main.c loop.c exec.c line.c builtin.c
-LINK= -lreadline
+SRC = main.c loop.c exec.c line.c builtin.c postgres.c
+LINK= -lreadline -lpq
 OBJ = $(SRC:.c=.ro)
 DBGOBJ = $(SRC:.c=.do)
 EXE  = dish

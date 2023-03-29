@@ -22,11 +22,11 @@ int dish_echo(char **args);
 int dish_laststatus(char **args);
 
 char *builtin_cmd[] = {"cd",     "help",     "exit", "clear",     "setenv",
-                       "getenv", "unsetenv", "echo", "laststatus"};
+                       "getenv", "unsetenv", "echo", "laststatus", defined_builtin};
 
 int (*builtin_func[])(char **) = {
     &dish_cd,     &dish_help,     &dish_exit, &dish_clear,     &dish_setenv,
-    &dish_getenv, &dish_unsetenv, &dish_echo, &dish_laststatus};
+    &dish_getenv, &dish_unsetenv, &dish_echo, &dish_laststatus, defined_builtin_func};
 
 int getBuiltinNum() { return sizeof(builtin_cmd) / sizeof(char *); }
 

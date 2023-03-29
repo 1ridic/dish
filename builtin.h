@@ -8,6 +8,11 @@
 #define _BUILTIN_H_
 
 #include "config.h"
+
+#ifdef POSTGRES
+#include "postgres.h"
+#endif
+
 int getBuiltinNum();
 
 #endif
