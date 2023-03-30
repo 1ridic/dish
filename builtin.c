@@ -42,7 +42,22 @@ int dish_cd(char **args) {
 }
 
 int dish_help(char **args) {
-  fprintf(stdout, "Yet another Shell with C.\n");
+  fprintf(stdout, \
+  "Yet another Shell with C.\n\
+  CopyRight (C) 2022-2033 1ridic\n\
+  Compiled on %s\n\
+  Compiler version %s\n\
+  Enabled features:\
+  ", \
+  __TIMESTAMP__, __VERSION__);
+
+  #ifdef DEBUG
+  fprintf(stdout, "DEBUG ");
+  #endif
+  #ifdef POSTGRES
+  fprintf(stdout, "POSTGRES ");
+  #endif
+  fprintf(stdout, "\n");
   return 0;
 }
 
