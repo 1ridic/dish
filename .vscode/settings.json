@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "history.h": "c"
     },
     "editor.tabSize": 2,
     "makefile.launchConfigurations": [
