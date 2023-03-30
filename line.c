@@ -42,29 +42,28 @@ char **splitLine(char *line) {
       int pair_flag = 0;
       while (1) {
         token = strtok(NULL, " \t\r\n\a");
-        if (token[strlen(token) - 1] == '"') {
+        if (token == NULL && pair_flag == 0) {
+          fprintf(stderr, "error: no pair \"\n");
+          return NULL;
+        }
+        /*if there exists a pair of "", break the loop*/
+        if ((strlen(token)>1 && token[strlen(token) - 1] == '"') || (strlen(token)==1 && token[0] == '"')) {
           /*delete the last " */
           token[strlen(token) - 1] = '\0';
           strcat(temp, " ");
           strcat(temp, token);
-          token=temp;
+          token = temp;
+          pair_flag = 1;
           break;
         } else {
           strcat(temp, " ");
           strcat(temp, token);
-          pair_flag = 1;
-        }
-        if(token==NULL&&pair_flag==0){
-          fprintf(stderr,"error: no pair \"\n");
-          return NULL;
         }
       }
-    }
-    else
-    {
-      char* temp=malloc(bufsize * sizeof(char *));
-      strcpy(temp,token);
-      token=temp;
+    } else {
+      char *temp = malloc(bufsize * sizeof(char *));
+      strcpy(temp, token);
+      token = temp;
     }
     tokens[position] = token;
 #ifdef DEBUG
